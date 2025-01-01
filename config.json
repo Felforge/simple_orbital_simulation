@@ -10,6 +10,8 @@
     "earth_color" : "#34A56F",
     "earth_distance" : 92.96,
     "default_velocity" : 30,
-    "default_velocity_angle" : 0,
-    "velocity_vector_color" : "#FF4B4B"
+    "velocity_vector_color" : "#FF4B4B",
+    "trajectory_color" : "#4169E1",
+    "animation_fps" : 60,
+    "orbit_duration" : 15
 }
