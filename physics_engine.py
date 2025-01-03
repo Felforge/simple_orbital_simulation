@@ -12,7 +12,7 @@ class PhysicsEngine:
         self.r0 = r0
         self.v0 = v0
         self.energy = 0.5 * (v0**2) - self.mu/r0
-        self.special_angular_momentum = r0 * v0
+        self.specific_angular_momentum = r0 * v0
 
     def get_semi_major(self):
         """
@@ -24,14 +24,14 @@ class PhysicsEngine:
         """
         Get closest distance to point of rotation
         """
-        return self.special_angular_momentum / np.sqrt(self.mu / self.get_semi_major())
+        return self.specific_angular_momentum / np.sqrt(self.mu / self.get_semi_major())
 
     def motion_derivatives(self, _, current_state):
         """
         Get derivatives of r, phi, and v_r to be used in finding position
         """
         r, _, r_dot = current_state
-        phi_dot = self.special_angular_momentum/(r**2)
+        phi_dot = self.specific_angular_momentum/(r**2)
         r_ddot = r*(phi_dot**2) - self.mu/(r**2)
         return [r_dot, phi_dot, r_ddot]
 
@@ -44,7 +44,7 @@ class PhysicsEngine:
                             rtol=1e-8, atol=1e-8, max_step=self.get_orbital_period()/100)
         r = state_t.y[0][-1]
         phi = state_t.y[1][-1]
-        omega = self.special_angular_momentum/(r**2)
+        omega = self.specific_angular_momentum/(r**2)
         v_t = r * omega
         return r, phi, v_t
 
